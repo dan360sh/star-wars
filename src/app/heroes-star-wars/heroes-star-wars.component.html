@@ -1,0 +1,56 @@
+<div class="row" style="background: black; align-items: center;">
+  <img style="width: 12%" src="http://classwar.ru/wp-content/uploads/2017/12/171227star_wars_feat2_300x300.png">
+  <mat-form-field class="form-select" appearance="fill">
+    <mat-label>Выберите героя</mat-label>
+    <mat-select (selectionChange)="chooseHero($event)">
+      <mat-option *ngFor="let item of listHeroes;" [value]=item>{{item.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="content-main">
+  <div class="row" style="padding-bottom: 20px; padding-top: 20px;" *ngIf="!busyindicatorInfo">
+    <div class="col-md-6 col-12" style="margin-bottom: 15px;" *ngIf="info">
+      <h3>Параметры: </h3>
+      <p> Имя: {{info.character?.name}}</p>
+      <p *ngIf="info.character?.height"> Рост : {{info.character?.height}} см.</p>
+      <p *ngIf="info.character?.mass"> Вес : {{info.character?.mass}} кг.</p>
+      <p *ngIf="info.character?.birth_year"> Дата рождения : {{info.character?.birth_year}}</p>
+      <p *ngIf="info.character?.gender"> Пол : {{info.character?.gender}}</p>
+      <p *ngIf="info.character?.eye_color"> Цвет глаз : {{info.character?.eye_color}}</p>
+      <p *ngIf="info.character?.skin_color"> Цвет кожи : {{info.character?.skin_color}}</p>
+      <p *ngIf="info.character?.hair_color"> Цвет волос : {{info.character?.hair_color}}</p>
+    </div>
+    <div class="col-md-6 col-12" *ngIf="info?.homeWorld">
+      <h3>Родная планета: </h3>
+      <p>Наименование: {{info?.homeWorld?.name}}</p>
+      <p>Популяция планеты: {{info?.homeWorld?.population}} существ</p>
+    </div>
+    <div class="col-md-6 col-12" style="margin-bottom: 15px;" *ngIf="info?.transport?.starships">
+      <h3>Звездолеты: </h3>
+      <div style="margin-bottom: 18px;" *ngFor="let i  of info?.transport?.starships;">
+        <p>Наименование: {{i.name}}</p>
+        <p>Модель: {{i.model}}</p>
+      </div>
+    </div>
+    <div style="margin-bottom: 15px;" class="col-md-6 col-12" *ngIf="info?.transport?.vehicles">
+      <h3>Транспорт: </h3>
+      <div style="margin-bottom: 18px;" *ngFor="let i  of info?.transport?.vehicles;">
+        <p>Наименование: {{i.name}}</p>
+        <p>Модель: {{i.model}}</p>
+      </div>
+    </div>
+    <div style="margin-bottom: 15px;" class="col-md-6 col-12" *ngIf="info?.films">
+      <h3>Появление в фильмах: </h3>
+      <div style="margin-bottom: 18px;" *ngFor="let i  of info?.films;">
+        <p>Наименование: {{i.title}}</p>
+        <p>Дата релиза: {{i.release_date}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="spinner-content" *ngIf="busyindicatorInfo">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div class="spinner" *ngIf="busyindicator">
+  <mat-spinner></mat-spinner>
+</div>
